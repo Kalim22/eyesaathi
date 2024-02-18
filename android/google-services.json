@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360959009434",
+    "project_id": "eyesathi-b2dad",
+    "storage_bucket": "eyesathi-b2dad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360959009434:android:0671cd69f39bec234f3523",
+        "android_client_info": {
+          "_name": "com.eye.saathi.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC8_cmy99zz5e1b6nB1wdemwp2qv-hH7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
