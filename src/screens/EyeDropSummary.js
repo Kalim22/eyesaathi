@@ -73,6 +73,12 @@ const EyeDropSummary = ({ navigation }) => {
 
     const fetchAddEyeSummary = () => {
         try {
+            if(selectStartDate === null){
+                return alert('Please select date')
+            }
+            if(selectEndDate === null){
+                return alert('Please select date')
+            }
             setLoading(true)
             const myHeaders = new Headers();
             myHeaders.append("Cookie", "PHPSESSID=eaf6c2f393986cb857ae8da9c66670c6");
@@ -124,7 +130,7 @@ const EyeDropSummary = ({ navigation }) => {
                     <View style={{ width: width, flex: 0.84, justifyContent: 'flex-start', paddingVertical: 10, alignItems: 'center' }}  >
                         <View style={{ width: width, justifyContent: 'center', alignItems: 'center', paddingVertical: 20, }}  >
                             <Image source={require('../assets/images/Summary.png')} style={{ width: 50, height: 50, }} resizeMode='cover' />
-                            <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>Eyedrops Summary</Text>
+                            <Text style={{ color: "#253d95", fontSize: width / 17, fontWeight: '600', paddingVertical: 4, }}>Eyedrops Summary</Text>
                             {/*<View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 30, height: 4 }} />*/}
                         </View>
                         <View style={{ position: "relative" }}>
@@ -155,7 +161,8 @@ const EyeDropSummary = ({ navigation }) => {
                                 : <CustomButton onPress={() => setShowCalender(true)} backgroundColor="transparent" borderColor="#fff" color="#253d95" marginTop={6} buttonText={`Date: From ${selectStartDate?.toJSON()?.split('T')[0]} to ${selectEndDate?.toJSON()?.split('T')[0]}`} />
                         }
                         <CustomButton elevation={2} borderColor="transparent" color="#fff" marginTop={30} buttonText="SAVE" onPress={fetchAddEyeSummary} />
-                        <CustomButton elevation={2} backgroundColor="#3FFB96" borderColor="transparent" color="#fff" marginTop={0} buttonText="VIEW" onPress={() => navigation.navigate('view-eye-drop-summary-list')} />
+                        <CustomButton elevation={2} backgroundColor="#3fbc96" borderColor="transparent" color="#fff" marginTop={0} buttonText="VIEW" onPress={() => navigation.navigate('view-eye-drop-summary-list')} />
+                        <CustomButton buttonText="BACK" onPress={() => navigation.goBack(-1)}  backgroundColor="transparent" borderColor="#fff" color="#253d95" />                  
                     </View>
                 </View>
             </ImageBackground>

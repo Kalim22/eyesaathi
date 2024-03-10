@@ -3,6 +3,43 @@ import React, { useState } from 'react'
 import Loader from '../../components/Loader'
 import ErrorComponent from '../../components/ErrorComponent'
 
+const indianStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Lakshadweep",
+    "Delhi",
+    "Puducherry"
+  ];
+  
 const Register = ({ navigation }) => {
 
     const { width, height } = useWindowDimensions()
@@ -23,6 +60,18 @@ const Register = ({ navigation }) => {
     const [errorState, setErrorState] = useState(false)
     const [errorDoctor, setErrorDoctor] = useState(false)
     const [errorHospital, setErrorHospital] = useState(false)
+    const [showState, setShowState] = useState(false)
+    
+
+    const handleSelectedState = (id) => {
+        setShowState(false)
+        return setState(id)
+    }
+
+    const handleReselectState = () => {
+        setShowState(!showState)
+        return setState('')
+    }
 
     const fetchRegister = () => {
         try {
@@ -48,6 +97,9 @@ const Register = ({ navigation }) => {
             if(hospital === ""){
                 return setErrorHospital(true)
             }
+            if(check == false){
+                return alert('Please accept terms and condtion!')
+            }
             setLoading(true)
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -63,7 +115,7 @@ const Register = ({ navigation }) => {
                 "hospital": hospital
             });
 
-            var requestOptions = {
+            const requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
                 body: raw,
@@ -74,8 +126,12 @@ const Register = ({ navigation }) => {
                 .then(response => response.json())
                 .then(result => {
                     setLoading(false)
-                    console.log(result)
-                    return navigation.navigate('login')
+                    console.log('register',result)
+                    if(result?.status === 'true'){
+                        alert(result?.message)
+                        return navigation.navigate('login')
+                    }
+                    return alert(result?.message)
                 })
                 .catch(error => console.log('error', error));
         } catch (error) {
@@ -92,7 +148,7 @@ const Register = ({ navigation }) => {
                     <View style={{ width: width, flex: 0.2, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
                         <Image source={require('../../assets/images/eyepressurelogo.png')} style={{ width: 120, height: 120, }} resizeMode='cover' />
                     </View>
-                    <ScrollView style={{ width: width, flex: 1 }} contentContainerStyle={{flexGrow: 1,justifyContent: 'flex-start', alignItems: 'center', }}>
+                    <ScrollView nestedScrollEnabled={true} style={{ width: width, flex: 1 }} contentContainerStyle={{flexGrow: 1,justifyContent: 'flex-start', alignItems: 'center', }}>
                         <TextInput onChangeText={text => {
                             setErrorName(false)
                             setName(text)
@@ -113,10 +169,25 @@ const Register = ({ navigation }) => {
                             setCity(text)
                         }} value={city} style={[styles.input, { width: width - 20 }]} placeholderTextColor="#253d95" placeholder='City'></TextInput>
                         {errorCity && <ErrorComponent error="Please enter your city" /> }
-                        <TextInput onChangeText={text => {
-                            setErrorState(false)
-                            setState(text)
-                        }} value={state} style={[styles.input, { width: width - 20 }]} placeholderTextColor="#253d95" placeholder='State'></TextInput>
+                        <TouchableOpacity style={[styles.input, { width: width - 20 }]} onPress={() => handleReselectState()}>
+                            <Text style={{color: "#253d95",fontSize: 20,fontWeight: '600',textAlign: 'center'}}>{state == '' ? 'Select State' : state}</Text>
+                        </TouchableOpacity>
+                        {
+                            showState &&
+                            <View style={{height: 330, width: width - 15, backgroundColor: '#fff', elevation: 2, justifyContent: 'center', alignItems: 'center', paddingVertical: 20, zIndex: 1, alignSelf: 'center', borderRadius: 8 }}>
+                                <ScrollView nestedScrollEnabled={true} contentContainerStyle={{ justifyContent: 'center', alignItems: 'center',}}>
+                                    {
+                                        indianStates?.map((ele, idx) => {
+                                            return (
+                                                <TouchableOpacity style={{ width: width - 50, marginVertical: 10, paddingHorizontal: 20, borderRadius: 10, borderColor: '#253d95', borderWidth: 2 }} key={idx} onPress={() => handleSelectedState(ele)}>
+                                                    <Text style={{ fontWeight: '500', fontSize: 20, paddingVertical: 10, color: '#253d95', paddingHorizontal: 10, }}>{ele}</Text>
+                                                </TouchableOpacity>
+                                            )
+                                        })
+                                    }
+                                </ScrollView>
+                            </View>
+                        }
                         {errorState && <ErrorComponent error="Please enter your state" /> }
                         <TextInput onChangeText={text => {
                             setErrorDoctor(false)

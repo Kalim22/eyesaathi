@@ -1,7 +1,7 @@
-import { AppState, Alert, Platform, StyleSheet, Text, View } from 'react-native'
+import {  Alert,  StyleSheet, } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Splash from './src/screens/Splash'
-import { Link, NavigationContainer } from '@react-navigation/native'
+import {  NavigationContainer, } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ScheduleDropsReminder from './src/screens/ScheduleDropsReminder'
 import GetStarted from './src/screens/GetStarted'
@@ -21,25 +21,18 @@ import UserProfile from './src/screens/UserProfile'
 import UploadPrescriptionDetails from './src/screens/UploadPrescriptionDetails'
 import ViewEyeDropSummaryList from './src/screens/ViewEyeDropSummaryList'
 
-import Practice from './src/screens/Practice'
-
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import BackgroundService from 'react-native-background-actions';
 import { Linking } from 'react-native';
-import notifee from '@notifee/react-native'
-import BackgroundActions from 'react-native-background-actions'
 import messaging from '@react-native-firebase/messaging';
-import { fetchToken, notification } from './src/utils/Notification'
-import { check, RESULTS, Permission, request, PERMISSIONS } from 'react-native-permissions'
-import PushNotification from 'react-native-push-notification';
+import { check, RESULTS, request, PERMISSIONS } from 'react-native-permissions'
 
 
 
 const Stack = createNativeStackNavigator()
 
 const App = ({ navigation }) => {
+
   const [eyeDropList, setEyeDropList] = useState({})
-  const [appointments, setAppointments] = useState(null)
 
   const fetchEyeDropData = async () => {
     try {
@@ -58,7 +51,7 @@ const App = ({ navigation }) => {
       fetch(`https://meduptodate.in/saathi/show_drop_time.php?email=${userProfile?.user_email}`, requestOptions)
         .then(response => response.json())
         .then(result => {
-          console.log('eyedrop', result?.dose_time[0])
+          // console.log('eyedrop', result?.dose_time[0])
           setEyeDropList(result)
         })
         .catch(error => console.log('error', error));
@@ -109,6 +102,8 @@ const App = ({ navigation }) => {
     })
   }
 
+  
+
   useEffect(() => {
     const subscribe = requestPermission()
     const subscribe2 = notification()
@@ -140,7 +135,6 @@ const App = ({ navigation }) => {
         <Stack.Screen name='user-profile' component={UserProfile} />
         <Stack.Screen name='upload-prescription-details' component={UploadPrescriptionDetails} />
         <Stack.Screen name='view-eye-drop-summary-list' component={ViewEyeDropSummaryList} />
-        <Stack.Screen name='practice' component={Practice} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -4,7 +4,7 @@ import CustomButton from '../components/CustomButton'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../components/Loader'
 
-const ViewEyeDropSummaryList = ({navigation}) => {
+const ViewEyeDropSummaryList = ({ navigation }) => {
     const { width, height } = useWindowDimensions()
 
     const [eyeDropList, setEyeDropList] = useState([])
@@ -29,7 +29,7 @@ const ViewEyeDropSummaryList = ({navigation}) => {
                 .then(response => response.json())
                 .then(result => {
                     setLoading(false)
-                    console.log('list----',result)
+                    console.log('list----', result)
                     return setEyeDropList(result)
                 })
                 .catch(error => console.log('error', error));
@@ -52,15 +52,15 @@ const ViewEyeDropSummaryList = ({navigation}) => {
                 </View>
                 <View style={{ flex: 0.86, justifyContent: 'flex-start', alignItems: 'center' }}>
                     <View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>View/Edit Eye Drop Schedule</Text>
+                        <Text style={{ color: "#253d95", fontSize: width / 17, fontWeight: '600', paddingVertical: 4, }}>View/Edit Eye Drop Schedule</Text>
                         <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
                     </View>
-                    <View style={{flex: 0.99, justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10,}}>
+                    <View style={{ flex: 0.99, justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10, }}>
                         <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 4 }}>
                             {
                                 eyeDropList?.data?.filter(ele => ele?.end_date !== '0000-00-00').map((ele, idx) => {
                                     return (
-                                        <CustomButton key={idx} buttonText={ele?.name_of_eyedrop} backgroundColor="#fff" borderColor="#fff" color="#253d95" onPress={() => navigation.navigate('eye-drop-details', {details: ele})}/>
+                                        <CustomButton key={idx} buttonText={ele?.name_of_eyedrop} backgroundColor="#fff" borderColor="#fff" color="#253d95" onPress={() => navigation.navigate('eye-drop-details', { details: ele })} />
                                     )
                                 })
                             }
@@ -68,7 +68,7 @@ const ViewEyeDropSummaryList = ({navigation}) => {
                     </View>
                 </View>
             </ImageBackground>
-                            <Loader loading={loading} />
+            <Loader loading={loading} />
         </View>
     )
 }

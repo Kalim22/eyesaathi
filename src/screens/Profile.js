@@ -8,10 +8,24 @@ const Profile = ({ navigation }) => {
 
     const { width } = useWindowDimensions()
 
-    const logout = async () => {
+    const handleLogout = async () => {
         try {
-            await AsyncStorage.removeItem('auth')
-            return navigation.navigate('splash')
+            const myHeaders = new Headers();
+            myHeaders.append("Cookie", "PHPSESSID=729e643e0577ba9194549e9185f2f746");
+
+            const requestOptions = {
+                method: "DELETE",
+                headers: myHeaders,
+                redirect: "follow"
+            };
+
+            const res = await fetch("https://meduptodate.in/saathi/logout.php", requestOptions)
+            const data = await res.json()
+            if (data?.status == true) {
+                await AsyncStorage.removeItem('auth')
+                return navigation.navigate('splash')
+            }
+            return alert(result?.message)
         } catch (error) {
             console.log(error)
         }
@@ -36,7 +50,7 @@ const Profile = ({ navigation }) => {
                         <CustomButton buttonText="Eyedrops Refill Purchase" onPress={() => navigation.navigate('eye-drop-refill-details')} backgroundColor="transparent" color="#253d95" borderColor="#fff" />
                         <CustomButton buttonText="Eyedrops Summary" onPress={() => navigation.navigate('eye-drop-summary')} backgroundColor="transparent" color="#253d95" borderColor="#fff" />
                         <CustomButton buttonText="Upload Prescription Details" onPress={() => navigation.navigate('upload-prescription-details')} backgroundColor="transparent" color="#253d95" borderColor="#fff" />
-                        <CustomButton buttonText="Log Out" onPress={logout} marginTop={30}/>
+                        <CustomButton buttonText="Log Out" onPress={handleLogout} marginTop={30} />
                     </View>
                 </View>
             </ImageBackground>

@@ -4,9 +4,10 @@ import Input from '../components/Input'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Loader from '../components/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from '../components/CustomButton';
 
 
-const UploadPrescription = () => {
+const UploadPrescription = ({navigation}) => {
 
     const { width } = useWindowDimensions()
 
@@ -117,6 +118,7 @@ const UploadPrescription = () => {
                         <TouchableOpacity activeOpacity={0.8} style={{ width: width - 40, borderRadius: 30, backgroundColor: "#253d95", marginTop: 15 }} onPress={fetchUploadDescription} >
                             <Text style={{ fontSize: 24, fontWeight: '600', color: '#fff', textAlign: 'center', paddingVertical: 12, }}>ADD</Text>
                         </TouchableOpacity>
+                        <CustomButton buttonText="BACK" length={40} marginTop={10} onPress={() => navigation.goBack(-1)}  backgroundColor="transparent" borderColor="#fff" color="#253d95" />
                     </View>
                 </View>
             </ImageBackground>

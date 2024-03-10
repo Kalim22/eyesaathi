@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, useWindowDimensions, ScrollView } from 'react-native'
+import {PixelRatio, Alert, StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, useWindowDimensions, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import CustomButton from '../components/CustomButton'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -9,10 +9,9 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import Input from '../components/Input'
 import Loader from '../components/Loader'
 
-const AppointmentDetails = () => {
+const AppointmentDetails = ({navigation}) => {
 
     const { width, height } = useWindowDimensions()
-
 
     const [showModal, setShowModal] = useState(false)
     const [showCalender, setShowCalender] = useState(false)
@@ -189,10 +188,10 @@ const AppointmentDetails = () => {
                 </View>
                 <View style={{ flex: 0.86, justifyContent: 'flex-start', alignItems: 'center' }}>
                     <View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>Appointment Details</Text>
+                        <Text style={{ color: "#253d95", fontSize: width / 17, fontWeight: '600', paddingVertical: 4, }}>Appointment Details</Text>
                         <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
                     </View>
-                    <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginVertical: 20, flex: 1, width }}>
+                    <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginTop: 14,marginBottom: 5, flex: 1, width }}>
                         <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', width }} >
                             {
                                 appointmentList?.appointments?.map((ele, idx) => {
@@ -212,6 +211,7 @@ const AppointmentDetails = () => {
                                 })
                             }
                         </ScrollView>
+                        <CustomButton buttonText="BACK" marginTop={10} onPress={() => navigation.goBack(-1)} backgroundColor="transparent" borderColor="#fff" color="#253d95" />
                     </View>
                 </View>
             </ImageBackground>

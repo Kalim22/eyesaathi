@@ -14,22 +14,14 @@ const GetStarted = ({ navigation, route }) => {
     async function requestUserPermission() {
         const authStatus = await messaging().requestPermission();
         const enabled =
-          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-      
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
         if (enabled) {
-          console.log('Authorization status:', authStatus);
-        }
-      }
-
-    const getFCMToken = async () => {
-        try {
-            const token = await messaging().registerDeviceForRemoteMessages();
-
-        } catch (error) {
-            console.log(error)
+            console.log('Authorization status:', authStatus);
         }
     }
+
 
     useEffect(() => {
         const subscribe = requestUserPermission()
@@ -48,13 +40,17 @@ const GetStarted = ({ navigation, route }) => {
                         <Text style={{ textAlign: 'center', color: '#008751', fontWeight: '800', fontSize: 38 }}>EyePressure</Text>
                         <Text style={{ textAlign: 'center', color: '#253d95', fontWeight: '800', fontSize: 38 }}>and</Text>
                         <Text style={{ textAlign: 'center', color: '#253d95', fontWeight: '800', fontSize: 38 }}>Preserve Sight</Text>
-                        <TouchableOpacity activeOpacity={0.8} style={{ width: width - 30, borderRadius: 30, backgroundColor: "#253d95", marginTop: 30 }} onPress={() => navigation.navigate(data?.params?.auth == null ? 'login' : 'bottom-navigation')}>
+                        <TouchableOpacity activeOpacity={0.8}
+                            style={{ width: width - 30, borderRadius: 30, backgroundColor: "#253d95", marginTop: 30 }}
+                            onPress={() => navigation.navigate('login')}
+                            disabled={data?.params?.disable ? false : true}
+                        >
                             <Text style={{ fontSize: 22, fontWeight: '600', color: '#fff', textAlign: 'center', paddingVertical: 12, }}>GET STARTED</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </ImageBackground>
-            <Loader loading={data?.params?.auth == '' ? true : false} />
+            <Loader loading={data?.params?.disable == '' ? true : false} />
         </View>
     )
 }

@@ -4,9 +4,10 @@ import Input from '../components/Input'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../components/Loader'
+import CustomButton from '../components/CustomButton'
 
 
-const EyeDropsRefillPurchase = () => {
+const EyeDropsRefillPurchase = ({navigation}) => {
     const { width } = useWindowDimensions()
 
     const [eyeDropName, setEyeDropName] = useState('')
@@ -51,7 +52,7 @@ const EyeDropsRefillPurchase = () => {
                     setLoading(false)
                     console.log(result)
                     if (result?.status === true) {
-                        setDateTime(null)
+                        setDateTime('')
                         setEyeDropName('')
                         return alert(result?.message)
                     }
@@ -73,7 +74,7 @@ const EyeDropsRefillPurchase = () => {
                     <View style={{ width: width, flex: 4, justifyContent: 'flex-start', paddingVertical: 10, alignItems: 'center' }}  >
                         <View style={{ width: width, justifyContent: 'center', alignItems: 'center', paddingVertical: 20, }}  >
                             <Image source={require('../assets/images/Prescription.png')} style={{ width: 45, height: 45, }} resizeMode='cover' />
-                            <Text style={{ color: "#253d95", fontSize: 18, paddingVertical: 4, }}>Eyedrops Refill/Purchase</Text>
+                            <Text style={{ color: "#253d95", fontSize: width / 17, paddingVertical: 4, }}>Eyedrops Refill/Purchase</Text>
                             <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 30, height: 4 }} />
                         </View>
                         <Input placeholder="Name of the Eyedrop" value={eyeDropName} onChangeText={text => setEyeDropName(text)} />
@@ -83,6 +84,7 @@ const EyeDropsRefillPurchase = () => {
                         <TouchableOpacity activeOpacity={0.8} style={{ width: width - 40, borderRadius: 30, backgroundColor: "#253d95", marginTop: 15 }} onPress={fetchEyeRefill}>
                             <Text style={{ fontSize: 24, fontWeight: '600', color: '#fff', textAlign: 'center', paddingVertical: 12, }}>ADD</Text>
                         </TouchableOpacity>
+                        <CustomButton buttonText="BACK" length={40} marginTop={10} onPress={() => navigation.goBack(-1)}  backgroundColor="transparent" borderColor="#fff" color="#253d95" />
                     </View>
                 </View>
             </ImageBackground>

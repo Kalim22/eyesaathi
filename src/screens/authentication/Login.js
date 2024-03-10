@@ -71,7 +71,10 @@ const Login = ({navigation}) => {
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center', width: width - 20, flexDirection: 'row' }}>
                             <Text style={{ fontSize: 16, color: "#253d95" }}>Don't have an account? </Text>
-                            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('register')} style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontWeight: '700', fontSize: 17, color: "#253d95" }}>Sign Up</Text></TouchableOpacity>
+                            <TouchableOpacity activeOpacity={0.8} onPress={() => {
+                                navigation.navigate('register')
+                                return setEmail('')
+                            }} style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontWeight: '700', fontSize: 17, color: "#253d95" }}>Sign Up</Text></TouchableOpacity>
                         </View>
                     </View>
 

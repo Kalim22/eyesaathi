@@ -10,31 +10,30 @@ const Splash = ({ navigation }) => {
     const isFocused = useIsFocused()
     const [auth, setAuth] = useState('')
     const [loading, setLoading] = useState(false)
+    const [buttonDisable, setButtonDisable] = useState(false)
 
     const checkAuth = async () => {
         try {
             setLoading(true)
             const auth = await AsyncStorage.getItem('auth')
             setLoading(false)
-            return auth
+            const parseData = JSON.parse(auth)
+            if(parseData?.status === true){
+                return navigation.navigate('bottom-navigation')
+            }else{
+                setTimeout(() => {
+                    setButtonDisable(true)
+                    return navigation.navigate('get-started', {auth, disable: buttonDisable})
+                }, 2000)
+            }
+            
         } catch (error) {
             console.log(error)
         }
     }
 
-    
-    const goToGetStarted = () => {
-        checkAuth().then(res => {
-            return setAuth(res)
-        })
-        setTimeout(() => {
-            return navigation.navigate('get-started', {auth})
-        }, 2500)
-    }
-
-    
     useEffect(() => {
-        const subscribe = goToGetStarted()
+        const subscribe = checkAuth()
 
         return () => [subscribe]
     }, [isFocused])

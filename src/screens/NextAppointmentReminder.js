@@ -4,9 +4,10 @@ import Input from '../components/Input'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from '../components/Loader'
+import CustomButton from '../components/CustomButton'
 
 
-const NextAppointmentReminder = () => {
+const NextAppointmentReminder = ({navigation}) => {
     const { width } = useWindowDimensions()
 
     const [appointmentTitle, setAppointmentTitle] = useState('')
@@ -35,7 +36,6 @@ const NextAppointmentReminder = () => {
             const yearMonth = dateTime.toJSON().substring(0,7)
             const date = (+dateTime.toJSON().substring(0, 10).split('-')[2] + 1)
 
-            console.log(dateTime.toJSON().split('T')[0])
             const formdata = new FormData();
             formdata.append("appointment_title", appointmentTitle);
             // formdata.append("appointment_date", `${yearMonth}-${date} ${dateTime.toString().split(' ')[4]}`);
@@ -78,7 +78,7 @@ const NextAppointmentReminder = () => {
                     <View style={{ width: width, flex: 4, justifyContent: 'flex-start', paddingVertical: 10, alignItems: 'center' }}  >
                         <View style={{ width: width, justifyContent: 'center', alignItems: 'center', paddingVertical: 20, }}  >
                             <Image source={require('../assets/images/Prescription.png')} style={{ width: 45, height: 45, }} resizeMode='cover' />
-                            <Text style={{ color: "#253d95", fontSize: 18, paddingVertical: 4, }}>Next Appointment Reminder</Text>
+                            <Text style={{ color: "#253d95", fontSize: width / 17, paddingVertical: 4, }}>Next Appointment Reminder</Text>
                             <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 30, height: 4 }} />
                         </View>
                         <Input placeholder="Appointment Title" value={appointmentTitle} onChangeText={text => setAppointmentTitle(text)} />
@@ -88,6 +88,7 @@ const NextAppointmentReminder = () => {
                         <TouchableOpacity activeOpacity={0.8} style={{ width: width - 40, borderRadius: 30, backgroundColor: "#253d95", marginTop: 15 }} onPress={fetchNextAppointment}>
                             <Text style={{ fontSize: 24, fontWeight: '600', color: '#fff', textAlign: 'center', paddingVertical: 12, }}>ADD</Text>
                         </TouchableOpacity>
+                        <CustomButton buttonText="BACK" length={40} marginTop={10} onPress={() => navigation.goBack(-1)}  backgroundColor="transparent" borderColor="#fff" color="#253d95" />
                     </View>
                 </View>
             </ImageBackground>

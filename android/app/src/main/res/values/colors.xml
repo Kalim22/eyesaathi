@@ -2,6 +2,7 @@
   <resources>
     <item  name="blue"  type="color">#00C4D1
     </item>
+    <color name="splashscreen_background">#ffffff</color>
     <integer-array  name="androidcolors">
     <item>@color/blue</item>
     </integer-array>

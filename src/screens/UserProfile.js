@@ -4,7 +4,8 @@ import CustomButton from '../components/CustomButton'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Input from '../components/Input'
 
-const UserProfile = () => {
+
+const UserProfile = ({ navigation }) => {
 
     const { width } = useWindowDimensions()
     const [profile, setProfile] = useState({})
@@ -36,7 +37,6 @@ const UserProfile = () => {
                 .then(response => response.json())
                 .then(result => {
                     setProfile(result)
-                    console.log('profile', result)
                     setName(result?.name)
                     setMobile(result?.mobile)
                     setCity(result?.city)
@@ -102,27 +102,30 @@ const UserProfile = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width, backgroundColor: '#fff' }} >
             <ImageBackground source={require('../assets/images/Background.png')} style={{ flex: 1, width: width }}>
-                <View style={{ flex: 0.14, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={require('../assets/images/eyepressurelogo.png')} style={{ width: 100, height: 100 }} resizeMode='cover' />
-                </View>
-                <View style={{ flex: 0.86, justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>Profile</Text>
-                        <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
+                <ScrollView>
+                    <View style={{ flex: 0.14, justifyContent: 'center', alignItems: 'center' }}>
+                        <Image source={require('../assets/images/eyepressurelogo.png')} style={{ width: 100, height: 100 }} resizeMode='cover' />
                     </View>
-                    <View style={{ position: "relative" }}>
+                    <View style={{ flex: 0.86, justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>Profile</Text>
+                            <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
+                        </View>
+                        <View style={{ position: "relative" }}>
+                        </View>
+                        <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginVertical: 20 }}>
+                            <Input marginVertical={6} value={profile?.name} editable={false} />
+                            <Input marginVertical={6} value={profile?.email} editable={false} />
+                            <Input marginVertical={6} value={profile?.mobile} editable={false} />
+                            <Input marginVertical={6} value={profile?.city} editable={false} />
+                            <Input marginVertical={6} value={profile?.state} editable={false} />
+                            <Input marginVertical={6} value={profile?.doctor_name} editable={false} />
+                            <Input marginVertical={6} value={profile?.hospital} editable={false} />
+                            <CustomButton buttonText="EDIT" marginTop={25} onPress={() => setShowModal(true)} />
+                            <CustomButton buttonText="BACK" onPress={() => navigation.goBack(-1)} backgroundColor="transparent" borderColor="#fff" color="#253d95" />
+                        </View>
                     </View>
-                    <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginVertical: 20 }}>
-                        <Input marginVertical={6} value={profile?.name} editable={false} />
-                        <Input marginVertical={6} value={profile?.email} editable={false} />
-                        <Input marginVertical={6} value={profile?.mobile} editable={false} />
-                        <Input marginVertical={6} value={profile?.city} editable={false} />
-                        <Input marginVertical={6} value={profile?.state} editable={false} />
-                        <Input marginVertical={6} value={profile?.doctor_name} editable={false} />
-                        <Input marginVertical={6} value={profile?.hospital} editable={false} />
-                        <CustomButton buttonText="EDIT" marginTop={25} onPress={() => setShowModal(true)} />
-                    </View>
-                </View>
+                </ScrollView>
             </ImageBackground>
             <Modal visible={showModal} transparent={true}>
                 <View style={{ flex: 1 }}>

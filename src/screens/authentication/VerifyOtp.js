@@ -17,6 +17,7 @@ const VerifyOtp = ({ navigation, route }) => {
 
     const sendOtp = () => {
         try {
+            console.log('send otp')
             setLoading(true)
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");

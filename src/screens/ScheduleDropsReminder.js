@@ -359,11 +359,13 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                 }
                             </ScrollView>
                         </View>
-                        <CustomButton marginTop={20} buttonText="Schedule Drop Reminder" onPress={() => setMoreEyeDropForm(true)} backgroundColor="transparent" color="#253d95" borderColor='#fff' />
+                        <CustomButton elevation={1} marginTop={20} buttonText="Schedule Drop Reminder" onPress={() => setMoreEyeDropForm(true)} backgroundColor="#253d95" color="#fff"  />
+
                         {
                             error &&
                             <ErrorComponent error={errorMessage} size={20} color={color} />
                         }
+                        <CustomButton buttonText="BACK" onPress={() => navigation.goBack(-1)}  backgroundColor="transparent" borderColor="#fff" color="#253d95" />
                         </View>
                 </View >
             </ImageBackground >
@@ -382,7 +384,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width, backgroundColor: 'transparent' }} >
                         <View style={{ flex: 0.20, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/eyepressurelogo.png')} style={{ width: 100, height: 100 }} resizeMode='cover' />
-                            <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>Add Eye Drop Schedule</Text>
+                            <Text style={{ color: "#253d95", fontSize: width / 17, fontWeight: '600', paddingVertical: 4, }}>Add Eye Drop Schedule</Text>
                             <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
                         </View>
                         <View style={{ flex: 0.80, justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -416,7 +418,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                             <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 1</Text>
                                         </View>
                                         <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseOneTimeModal(true)}>
-                                            <Text style={[styles.doseText]}>{doseOneTime === "" ? "/ 00:00:00 AM" : `${doseOneTime.toString().split(' ')[4]}`}</Text>
+                                            <Text style={[styles.doseText]}>{doseOneTime === "" ? "/ 00:00:00" : `${doseOneTime.toString().split(' ')[4]}`}</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -426,7 +428,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                             <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 2</Text>
                                         </View>
                                         <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseTwoTimeModal(true)}>
-                                            <Text style={[styles.doseText]}>{doseTwoTime === "" ? "/ 00:00:00 AM" : `${doseTwoTime.toString().split(' ')[4]}`}</Text>
+                                            <Text style={[styles.doseText]}>{doseTwoTime === "" ? "/ 00:00:00" : `${doseTwoTime.toString().split(' ')[4]}`}</Text>
                                         </TouchableOpacity>
                                     </View>
 
@@ -439,7 +441,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                                     <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 3</Text>
                                                 </View>
                                                 <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseThreeTimeModal(true)}>
-                                                    <Text style={[styles.doseText]}>{doseThreeTime === "" ? "/ 00:00:00 AM" : `${doseThreeTime.toString().split(' ')[4]}`}</Text>
+                                                    <Text style={[styles.doseText]}>{doseThreeTime === "" ? "/ 00:00:00" : `${doseThreeTime.toString().split(' ')[4]}`}</Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -451,7 +453,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                             <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 4</Text>
                                         </View>
                                         <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseFourTimeModal(true)}>
-                                            <Text style={[styles.doseText]}>{doseFourTime === "" ? "/ 00:00:00 AM" : `${doseFourTime.toString().split(' ')[4]}`}</Text>
+                                            <Text style={[styles.doseText]}>{doseFourTime === "" ? "/ 00:00:00" : `${doseFourTime.toString().split(' ')[4]}`}</Text>
                                         </TouchableOpacity>
                                     </View>
 
@@ -462,7 +464,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                             <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 5</Text>
                                         </View>
                                         <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseFiveTimeModal(true)}>
-                                            <Text style={[styles.doseText]}>{doseFiveTime === "" ? "/ 00:00:00 AM" : `${doseFiveTime.toString().split(' ')[4]}`}</Text>
+                                            <Text style={[styles.doseText]}>{doseFiveTime === "" ? "/ 00:00:00" : `${doseFiveTime.toString().split(' ')[4]}`}</Text>
                                         </TouchableOpacity>
                                     </View>
 
@@ -473,7 +475,7 @@ const ScheduleDropsReminder = ({ navigation }) => {
                                             <Text style={{ fontSize: 22, color: '#253d95' }}>Dose 6</Text>
                                         </View>
                                         <TouchableOpacity style={[styles.doseBox, { width: width / 2 }]} onPress={() => setDoseSixTimeModal(true)}>
-                                            <Text style={[styles.doseText]}>{doseSixTime === "" ? "/ 00:00:00 AM" : `${doseSixTime.toString().split(' ')[4]}`}</Text>
+                                            <Text style={[styles.doseText]}>{doseSixTime === "" ? "/ 00:00:00" : `${doseSixTime.toString().split(' ')[4]}`}</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

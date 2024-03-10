@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, useWindowDimensions } from 'react-native'
+import {PixelRatio, StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import CustomButton from '../components/CustomButton'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
@@ -176,7 +176,7 @@ const DropDoseDateTime = ({ route, navigation }) => {
                 </View>
                 <View style={{ flex: 0.86, justifyContent: 'flex-start', alignItems: 'center' }}>
                     <View style={{ width, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: "#253d95", fontSize: 26, fontWeight: '600', paddingVertical: 4, }}>View/Edit Eye Drop Schedule</Text>
+                        <Text style={{ color: "#253d95", fontSize: width / 17, fontWeight: '600', paddingVertical: 4, }}>Views/Edit Eye Drop Schedule</Text>
                         <View style={{ borderBottomColor: '#253d95', borderBottomWidth: 3, width: width - 50, height: 4 }} />
                     </View>
                     <View style={{ position: "relative" }}>
